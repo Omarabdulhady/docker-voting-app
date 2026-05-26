@@ -20,6 +20,10 @@ services:
      - ./vote:/usr/local/app
     ports:
       - "8080:80"
+    environment:
+      OPTION_A: "DevOps"
+      OPTION_B: "Testing"
+
     networks:
       - front-tier
       - back-tier
@@ -36,6 +40,9 @@ services:
     ports:
       - "8081:80"
       - "127.0.0.1:9229:9229"
+    environment:
+      OPTION_A: "DevOps"
+      OPTION_B: "Testing"
     networks:
       - front-tier
       - back-tier

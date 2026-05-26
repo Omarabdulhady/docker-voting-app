@@ -1,112 +1,226 @@
-@import url(//fonts.googleapis.com/css?family=Open+Sans:400,700,600);
+@import url(https://fonts.googleapis.com/css?family=Open+Sans:400,600,700);
+
+/* --- Omar Dark Theme (Result Page) --- */
+
+:root{
+  --bg: #0b1220;
+  --text: #e8eef7;
+  --muted: rgba(232,238,247,0.65);
+
+  --surface: rgba(255,255,255,0.06);
+  --surface-2: rgba(255,255,255,0.10);
+  --border: rgba(255,255,255,0.12);
+
+  /* Accents */
+  --devops1: #22c1ff; /* cyan */
+  --devops2: #2b77ff; /* blue */
+  --testing1: #7c4dff; /* purple */
+  --testing2: #ff4d8d; /* pink */
+
+  --shadow: 0 18px 45px rgba(0,0,0,0.55);
+  --shadow-soft: 0 10px 26px rgba(0,0,0,0.40);
+  --radius: 18px;
+}
 
 *{
-  box-sizing:border-box;
-}
-html,body{
-  margin:0;
-  padding:0;
-  height:100%;
-  font-family: 'Open Sans';
-}
-body{
-  opacity:0;
-  transition: all 1s linear;
+  box-sizing: border-box;
 }
 
+html,body{
+  margin: 0;
+  padding: 0;
+  height: 100%;
+  font-family: "Open Sans", "Segoe UI", Inter, system-ui, -apple-system, Arial, sans-serif;
+}
+
+body{
+  /* Keep your fade-in behavior */
+  opacity: 0;
+  transition: all 1s linear;
+
+  background:
+    radial-gradient(1200px 700px at 20% 10%, rgba(43,119,255,0.25), transparent 60%),
+    radial-gradient(900px 650px at 90% 35%, rgba(255,77,141,0.18), transparent 55%),
+    radial-gradient(700px 500px at 60% 95%, rgba(34,193,255,0.12), transparent 55%),
+    var(--bg);
+  color: var(--text);
+}
+
+/* Divider between the two results */
 .divider{
-  height: 150px;
-  width:2px;
-  background-color: #C0C9CE;
+  height: 140px;
+  width: 2px;
+  background-color: rgba(232,238,247,0.20);
   position: relative;
   top: 50%;
   float: left;
   transform: translateY(-50%);
+  border-radius: 10px;
 }
 
+/* Background bars (these are behind content) */
+#background-stats{
+  z-index: 1;
+  height: 100%;
+  width: 100%;
+  position: absolute;
+}
+
+#background-stats div{
+  transition: width 400ms ease-in-out;
+  display: inline-block;
+  margin-bottom: -4px;
+  width: 50%;
+  height: 100%;
+  opacity: 0.16;
+}
+
+/* Left side background (DevOps) */
 #background-stats-1{
-  background-color: #2196f3;
+  background: linear-gradient(180deg, rgba(34,193,255,0.40), rgba(43,119,255,0.08));
 }
 
+/* Right side background (Testing) */
 #background-stats-2{
-  background-color: #00cbca;
+  background: linear-gradient(180deg, rgba(124,77,255,0.35), rgba(255,77,141,0.08));
 }
 
+/* Main layout container */
 #content-container{
-  z-index:2;
-  position:relative;
-  margin:0 auto;
-  display:table;
-  padding:10px;
-  max-width:940px;
-  height:100%;
+  z-index: 2;
+  position: relative;
+  margin: 0 auto;
+  display: table;
+  padding: 18px 14px;
+  max-width: 980px;
+  height: 100%;
 }
+
 #content-container-center{
-  display:table-cell;
-  text-align:center;
-  vertical-align:middle;
+  display: table-cell;
+  text-align: center;
+  vertical-align: middle;
 }
+
+/* “RESULT” watermark */
 #result{
   z-index: 3;
   position: absolute;
-  bottom: 40px;
-  right: 20px;
-  color: #fff;
-  opacity: 0.5;
-  font-size: 45px;
-  font-weight: 600;
-}
-#choice{
-  transition: all 300ms linear;
-  line-height:1.3em;
-  background:#fff;
-  box-shadow: 10px 0 0 #fff, -10px 0 0 #fff;
-  vertical-align:middle;
-  font-size:40px;
-  font-weight: 600;
-  width: 450px;
-  height: 200px;
-}
-#choice a{
-  text-decoration:none;
-}
-#choice a:hover, #choice a:focus{
-  outline:0;
-  text-decoration:underline;
+  bottom: 30px;
+  right: 22px;
+  color: rgba(232,238,247,0.35);
+  font-size: 44px;
+  font-weight: 700;
+  letter-spacing: 1.2px;
 }
 
+/* Results card */
+#choice{
+  transition: all 300ms ease;
+  line-height: 1.3em;
+
+  background: linear-gradient(180deg, var(--surface), rgba(255,255,255,0.03));
+  border: 1px solid var(--border);
+  border-radius: var(--radius);
+
+  box-shadow: var(--shadow);
+  backdrop-filter: blur(10px);
+
+  vertical-align: middle;
+
+  font-size: 42px;
+  font-weight: 700;
+
+  width: 520px;
+  max-width: 92vw;
+  height: 220px;
+  position: relative;
+
+  /* remove old white “side shadows” */
+  box-shadow: var(--shadow);
+}
+
+#choice a{
+  text-decoration: none;
+  color: inherit;
+}
+
+#choice a:hover, #choice a:focus{
+  outline: 0;
+  text-decoration: underline;
+}
+
+/* Two halves */
 #choice .choice{
   width: 49%;
   position: relative;
   top: 50%;
   transform: translateY(-50%);
   text-align: left;
-  padding-left: 50px;
+  padding-left: 42px;
 }
 
+/* ✅ Label style (NO uppercase now) */
 #choice .choice .label{
-  text-transform: uppercase;
+  text-transform: none;           /* <— this fixes the UPPERCASE */
+  letter-spacing: 0.4px;
+  font-size: 34px;
+  font-weight: 800;
+  color: rgba(232,238,247,0.92);
 }
 
+/* Percent style (the number below label) */
+#choice .choice .percent{
+  margin-top: 10px;
+  font-size: 54px;
+  font-weight: 800;
+  letter-spacing: 0.2px;
+  color: rgba(232,238,247,0.98);
+  text-shadow: 0 2px 18px rgba(0,0,0,0.35);
+}
+
+/* Right side (Testing) */
 #choice .choice.dogs{
-  color: #00cbca;
   float: right;
+  border-left: 1px solid rgba(232,238,247,0.10);
 }
 
+/* Left side (DevOps) */
 #choice .choice.cats{
-  color: #2196f3;
   float: left;
 }
-#background-stats{
-  z-index:1;
-  height:100%;
-  width:100%;
-  position:absolute;
+
+/* Accent glows */
+#choice .choice.cats .percent{
+  background: linear-gradient(135deg, var(--devops1), var(--devops2));
+  -webkit-background-clip: text;
+  background-clip: text;
+  color: transparent;
 }
-#background-stats div{
-  transition: width 400ms ease-in-out;
-  display:inline-block;
-  margin-bottom:-4px;
-  width:50%;
-  height:100%;
+
+#choice .choice.dogs .percent{
+  background: linear-gradient(135deg, var(--testing1), var(--testing2));
+  -webkit-background-clip: text;
+  background-clip: text;
+  color: transparent;
+}
+
+/* Responsive tweaks */
+@media (max-width: 420px){
+  #choice{
+    height: 210px;
+    font-size: 36px;
+  }
+  #choice .choice{
+    padding-left: 24px;
+  }
+  #choice .choice .label{
+    font-size: 26px;
+  }
+  #choice .choice .percent{
+    font-size: 48px;
+  }
+  #result{
+    font-size: 34px;
+  }
 }

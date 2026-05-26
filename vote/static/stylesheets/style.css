@@ -1,129 +1,253 @@
-@import url(//fonts.googleapis.com/css?family=Open+Sans:400,700,600);
+/* --- Modern Dark Theme for Voting App --- */
+
+/* Keep Google font import (optional). If it ever fails, we fall back to system fonts. */
+@import url(https://fonts.googleapis.com/css?family=Open+Sans:400,600,700);
+
+:root{
+  /* Dark palette */
+  --bg: #0b1220;
+  --surface: rgba(255,255,255,0.06);
+  --surface-2: rgba(255,255,255,0.10);
+  --border: rgba(255,255,255,0.10);
+  --text: #e8eef7;
+  --muted: rgba(232, 238, 247, 0.70);
+  --muted-2: rgba(232, 238, 247, 0.55);
+
+  /* Accents (DevOps / Testing) */
+  --a1: #22c1ff;   /* cyan */
+  --a2: #2b77ff;   /* blue */
+  --b1: #7c4dff;   /* purple */
+  --b2: #ff4d8d;   /* pink */
+
+  /* Effects */
+  --shadow: 0 12px 40px rgba(0,0,0,0.55);
+  --shadow-soft: 0 10px 24px rgba(0,0,0,0.35);
+  --radius: 18px;
+}
 
 *{
-  box-sizing:border-box;
-}
-html,body{
-  margin: 0;
-  padding: 0;
-  background-color: #F7F8F9;
-  height: 100vh;
-  font-family: 'Open Sans';
+  box-sizing: border-box;
 }
 
+html, body{
+  margin: 0;
+  padding: 0;
+  height: 100vh;
+  background:
+    radial-gradient(1200px 700px at 20% 10%, rgba(43,119,255,0.25), transparent 60%),
+    radial-gradient(900px 650px at 90% 35%, rgba(255,77,141,0.18), transparent 55%),
+    radial-gradient(700px 500px at 60% 95%, rgba(34,193,255,0.12), transparent 55%),
+    var(--bg);
+  color: var(--text);
+
+  /* Modern font stack (looks great on Windows) */
+  font-family: "Open Sans", "Segoe UI", Inter, system-ui, -apple-system, Arial, sans-serif;
+}
+
+/* Buttons: base */
 button{
   border-radius: 0;
   width: 100%;
   height: 50%;
+  border: none;
+  cursor: pointer;
 }
 
 button[type="submit"] {
-  -webkit-appearance:none; -webkit-border-radius:0;
+  -webkit-appearance: none;
+  -webkit-border-radius: 0;
 }
 
+/* Icon on the right (the check) */
 button i{
   float: right;
-  padding-right: 30px;
-  margin-top: 3px;
+  padding-right: 26px;
+  margin-top: 2px;
+  opacity: 0.95;
 }
 
+/* Legacy classes still supported */
 button.a{
-  background-color: #1aaaf8;
+  background-color: #1aaaf8; /* fallback */
 }
-
 button.b{
-  background-color: #00cbca;
+  background-color: #00cbca; /* fallback */
 }
 
+/* Tip text */
 #tip{
   text-align: left;
-  color: #c0c9ce;
+  color: var(--muted-2);
   font-size: 14px;
+  margin-top: 12px;
 }
 
+/* Hostname footer */
 #hostname{
   position: absolute;
-  bottom: 100px;
+  bottom: 90px;
   right: 0;
   left: 0;
-  color: #8f9ea8;
-  font-size: 24px;
+  color: var(--muted-2);
+  font-size: 18px;
+  letter-spacing: 0.2px;
 }
 
+/* Main layout container */
 #content-container{
   z-index: 2;
   position: relative;
   margin: 0 auto;
   display: table;
-  padding: 10px;
-  max-width: 940px;
+  padding: 22px 14px;
+  max-width: 980px;
   height: 100%;
 }
+
 #content-container-center{
   display: table-cell;
   text-align: center;
+  vertical-align: middle;
 }
 
+/* Title / heading */
 #content-container-center h3{
-  color: #254356;
+  color: var(--text);
+  font-weight: 700;
+  letter-spacing: 0.2px;
+  margin: 0 0 18px 0;
+  text-shadow: 0 2px 14px rgba(0,0,0,0.35);
 }
 
+/* Choice wrapper */
 #choice{
-  transition: all 300ms linear;
+  transition: all 300ms ease;
   line-height: 1.3em;
-  display: inline;
+  display: inline-block;
   vertical-align: middle;
   font-size: 3em;
-}
-#choice a{
-  text-decoration:none;
-}
-#choice a:hover, #choice a:focus{
-  outline:0;
-  text-decoration:underline;
+
+  /* Card-like look */
+  padding: 22px 22px 16px 22px;
+  border-radius: var(--radius);
+  background: linear-gradient(180deg, var(--surface), rgba(255,255,255,0.03));
+  border: 1px solid var(--border);
+  box-shadow: var(--shadow);
+  backdrop-filter: blur(10px);
 }
 
+#choice a{
+  text-decoration: none;
+  color: inherit;
+}
+
+#choice a:hover, #choice a:focus{
+  outline: 0;
+  text-decoration: underline;
+}
+
+/* The two main buttons */
 #choice button{
   display: block;
-  height: 80px;
-  width: 330px;
-  border: none;
+  height: 86px;
+  width: 360px;
+  border: 1px solid rgba(255,255,255,0.12);
+  border-radius: 16px;
+
   color: white;
-  text-transform: uppercase;
-  font-size:18px;
-  font-weight: 700;
-  margin-top: 10px;
-  margin-bottom: 10px;
+  text-transform: none;
+  letter-spacing: 0.4px; /* optional, looks good */
+  font-family: ui-sans-serif, "Segoe UI", Inter, system-ui, Arial, sans-serif;
+  font-weight: 800;
+
+  font-size: 18px;
+  font-weight: 800;
+  letter-spacing: 0.6px;
+
+  margin: 12px auto;
   text-align: left;
-  padding-left: 50px;
+  padding-left: 26px;
+  padding-right: 10px;
+
+  box-shadow: var(--shadow-soft);
+  transition: transform 160ms ease, box-shadow 160ms ease, filter 160ms ease;
 }
 
-#choice button.a:hover{
-  background-color: #1488c6;
+/* A = DevOps (blue/cyan) */
+#choice button.a{
+  background: linear-gradient(135deg, var(--a1), var(--a2));
 }
 
+/* B = Testing (purple/pink) */
+#choice button.b{
+  background: linear-gradient(135deg, var(--b1), var(--b2));
+}
+
+/* Hover effects */
+#choice button.a:hover,
 #choice button.b:hover{
-  background-color: #00a2a1;
+  transform: translateY(-2px);
+  filter: brightness(1.06);
+  box-shadow: 0 16px 34px rgba(0,0,0,0.45);
+}
+
+/* Focus states (keyboard + accessibility) */
+#choice button:focus{
+  outline: none;
 }
 
 #choice button.a:focus{
-  background-color: #1488c6;
+  box-shadow: 0 0 0 4px rgba(34,193,255,0.22), 0 16px 34px rgba(0,0,0,0.45);
 }
 
 #choice button.b:focus{
-  background-color: #00a2a1;
+  box-shadow: 0 0 0 4px rgba(255,77,141,0.20), 0 16px 34px rgba(0,0,0,0.45);
 }
 
-#background-stats{
-  z-index:1;
-  height:100%;
-  width:100%;
-  position:absolute;
+/* Optional: pressed state */
+#choice button:active{
+  transform: translateY(0px) scale(0.99);
 }
+
+/* Background stats bars (behind everything) */
+#background-stats{
+  z-index: 1;
+  height: 100%;
+  width: 100%;
+  position: absolute;
+}
+
+/* Two halves (A and B) */
 #background-stats div{
   transition: width 400ms ease-in-out;
-  display:inline-block;
-  margin-bottom:-4px;
-  width:50%;
-  height:100%;
+  display: inline-block;
+  margin-bottom: -4px;
+  width: 50%;
+  height: 100%;
+  opacity: 0.16;
+  filter: blur(0.5px);
+}
+
+/* Make the background halves match the button themes nicely */
+#background-stats div:first-child{
+  background: linear-gradient(180deg, rgba(34,193,255,0.40), rgba(43,119,255,0.08));
+}
+#background-stats div:last-child{
+  background: linear-gradient(180deg, rgba(124,77,255,0.35), rgba(255,77,141,0.08));
+}
+
+/* Responsive tweak for smaller screens */
+@media (max-width: 420px){
+  #choice{
+    padding: 18px 14px 12px 14px;
+    border-radius: 16px;
+  }
+  #choice button{
+    width: 300px;
+    height: 82px;
+    font-size: 16px;
+  }
+  #hostname{
+    font-size: 16px;
+  }
 }
