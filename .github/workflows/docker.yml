@@ -12,5 +12,11 @@ jobs:
     - name: Checkout code
       uses: actions/checkout@v4
 
-    - name: Build Docker image (vote service)
+    - name: Build vote service
       run: docker build ./vote
+
+    - name: Build result service
+      run: docker build ./result
+
+    - name: Build worker service
+      run: docker build ./worker
